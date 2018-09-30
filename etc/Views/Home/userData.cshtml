@@ -1,0 +1,53 @@
+﻿@{
+    var result = "";
+    if (IsPost)
+    {
+        var hourly = Request["hourly"];
+        var daily = Request["daily"];
+        var userData = hourly + "," + daily+Environment.NewLine;
+        var dataFile = Server.MapPath("~/App_Data/data.txt");
+        File.WriteAllText(@dataFile, userData);
+        result = "Information saved.";
+
+
+    }
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>Write Rainfall Data to A File</title>
+</head>
+<body>
+    <form id="form1" method="post">
+        <div>
+            <table>
+                <tr>
+                    <td>Hourly</td>
+                    <td>
+                        <input id="hourly" name="hourly" type="text" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>Daily</td>
+                    <td>
+                        <input id="daily" name="daily" type="text" />
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td> <input type="submit" value="Submit" /></td>
+                </tr>
+            </table>
+        </div>
+        <div>
+            @if(result!="")
+            {
+                <p>Result:@result</p>
+            }
+                
+        </div>
+    </form>
+</body>
+</html>

@@ -1,0 +1,50 @@
+﻿
+@model etc.Models.ETtimeSpan
+
+<h5> Input Start and End Date</h5>
+
+@*<script src="~/Scripts/jquery-2.2.3.min.js"></script>
+<script src="~/Scripts/jquery-ui-1.11.4.js"></script>*@
+
+@using (Ajax.BeginForm("getTimeSpan", "Home", new AjaxOptions { UpdateTargetId = "Response from Controller" }))
+{
+    <fieldset>
+        <div class="form-group input-group-sm">
+            @Html.LabelFor(model => model.start, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.EditorFor(model => model.start, new { htmlAttributes = new { type = "date", @class = "datepicker form-control ", placeholder = "Enter start date here...", required = "required" } })
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.end, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.EditorFor(model => model.end, new { htmlAttributes = new { type = "date", @class = "datepicker form-control ", placeholder = "Enter end date here...", required = "required" } })
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Submit" class="btn btn-default" />
+            </div>
+        </div>
+        <p>
+            <h5>
+                @ViewBag.test + @ViewBag.fromControllerMessage;
+            </h5>
+        </p>
+
+    </fieldset>
+
+}
+<script type="text/javascript">
+
+    ////// will trigger when the document is ready
+    ////$('.datepicker').datepicker({
+    ////    format: "yyyy/mm/dd",
+    ////    todayBtn: "linked",
+    ////    autoclose: true,
+    ////    todayHighlight: true,
+    ////    id: "datepickerId"
+
+    ////}); //Initialise any date pickers
+
+
+</script>
+
+
+

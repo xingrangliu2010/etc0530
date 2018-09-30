@@ -1,0 +1,41 @@
+﻿@{
+    bool deleteSuccess = false;
+    var dataFileName = "";
+    if (IsPost)
+    {
+        dataFileName = Request["dataFileName"] + ".dat";
+        var fullPath = Server.MapPath("~/sensorData/" + dataFileName);
+        if(File.Exists(fullPath))
+        {
+
+            File.Delete(fullPath);
+            deleteSuccess = true;
+            
+        }
+        
+    }
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Delete a File</title>
+</head>
+<body>
+    <h1>Delete a data file which has been stored in the server </h1>
+    <form name="deleteDataFile" action="" method="post">
+        <p> File name of a data file to delete (without .dat extension)
+        <input name="dataFileName" type="text" value="" />
+        </p>
+        <p> <input type="submit"  value="Submit"/></p>
+        
+    </form>
+    @if (deleteSuccess)
+    {
+        <p>
+            @dataFileName deleted! 
+        </p>
+    }
+</body>
+</html>
+

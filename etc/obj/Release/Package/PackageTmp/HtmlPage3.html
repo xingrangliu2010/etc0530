@@ -1,0 +1,26 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>File Upload</title>
+</head>
+<body>
+    <form id="myForm" method="post" enctype="multipart/form-data" action="">
+        <div>
+            <h5>File Upload- Multiple File Uploading</h5>
+            @if(!IsPost)
+            {
+            @FileUpload.GetHtml(
+            initialNumberOfFiles:2,
+            allowMoreFilesToBeAdded:true,
+            includeFormTag:true,
+            addText:"Add another file",
+            uploadText:"Upload"
+            )
+            }
+            <span>@message</span>
+        </div>
+    </form>
+
+</body>
+</html>
+

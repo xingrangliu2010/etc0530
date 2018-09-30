@@ -1,0 +1,104 @@
+﻿@model etc.Models.lineDataTimeSpan
+@{
+    ViewBag.Title = "ET Data";
+}
+
+<script src="~/Scripts/jquery-2.2.3.min.js"></script>
+<script src="~/Scripts/Highcharts-4.0.1/js/highcharts.js"></script>
+
+<h5> Input Start and End Date</h5>
+
+@*<script src="~/Scripts/jquery-2.2.3.min.js"></script>
+    <script src="~/Scripts/jquery-ui-1.11.4.js"></script>*@
+
+@using(Ajax.BeginForm ("Index", "Home", new AjaxOptions { UpdateTargetId = "Response from Controller" }))
+{
+    <fieldset>
+
+        <div class="form-group input-group-sm">
+            @Html.LabelFor(model => model.start, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.EditorFor(model => model.start, new { htmlAttributes = new { type = "date", @class = "datepicker form-control ", placeholder = "Enter start date here...", required = "required" } })
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.end, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.EditorFor(model => model.end, new { htmlAttributes = new { type = "date", @class = "datepicker form-control ", placeholder = "Enter end date here...", required = "required" } })
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Submit" class="btn btn-default" />
+            </div>
+        </div>
+
+
+    </fieldset>
+}
+
+
+@((DotNet.Highcharts.Highcharts)ViewBag.theChartModel)
+
+<h5>Hourly data within the start and end timey </h5>
+<div>
+    <table border="1">
+
+        <tr>
+
+            <th>DateTime</th>
+            <th>Net_Radiation</th>
+            <th>Net_Radiation_Corrected</th>
+            <th>Soil_Heat_Flux</th>
+            <th>Latenet_Heat_Flux</th>
+            <th>Sensible_heat_flux</th>
+            <th>BR</th>
+            <th>leadjust1</th>
+            <th>leadjust2</th>
+            <th>leadjust3</th>
+            <th>Rainfall</th>
+
+
+
+        </tr>
+
+        @if (ViewData["hourlyData"] != null)
+        {
+
+            foreach (System.Data.DataRow dr in (ViewData["hourlyData"] as System.Data.DataTable).Rows)
+            {
+
+                <tr>
+
+                    <td>
+                       @dr["theDateTime"]
+
+                    </td>
+                    <td align="left">@dr["Net_Radiation"]</td>
+                    <td align="left">@dr["Net_Radiation_Corrected"]</td>
+                    <td align ="left">@dr["Soil_Heat_Flux"]</td>
+                    <td align="left">@dr["Latenet_Heat_Flux"]</td>
+                    <td align="left">@dr["Sensible_heat_flux"]</td>
+                    <td align="left">@dr["BR"]</td>
+                    <td align ="left">@dr["leadjust1"]</td>
+                    <td align="left">@dr["leadjust2"]</td>
+                    <td align="left">@dr["leadjust3"]</td>
+
+                    <td align="left">
+                       @dr["rainfall"]
+                    </td>
+
+                </tr>
+
+            }
+
+        }
+
+    </table>
+</div>
+
+
+
+
+
+
+
+
+
+
